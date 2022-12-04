@@ -1,47 +1,14 @@
-import { Button } from "@mui/material";
+import React from "react";
+import Buttons from "../Buttons/Buttons";
+import CartWidget from "../CartWidget/CartWidget";
 import "./Navbar.css";
 
 const Navbar = () => {
+  const menu = ['Home', 'Products', 'Favourites']
   return (
     <div className="navbar">
-      {/*         <Typography>E-commerce</Typography>
-       */}
-      <Button
-        variant="contained"
-        className="Btn"
-        sx={{
-          backgroundColor: "white",
-          color: "black",
-          borderRadius: "15px",
-          fontSize: "10px",
-        }}
-      >
-        Home
-      </Button>
-      <Button
-        variant="contained"
-        className="Btn"
-        sx={{
-          backgroundColor: "white",
-          color: "black",
-          borderRadius: "15px",
-          fontSize: "10px",
-        }}
-      >
-        Productos
-      </Button>
-      <Button
-        variant="contained"
-        className="Btn"
-        sx={{
-          backgroundColor: "white",
-          color: "black",
-          borderRadius: "15px",
-          fontSize: "10px",
-        }}
-      >
-        Carrito
-      </Button>
+      {menu.map(label => <Buttons>{label}</Buttons>)}
+      <CartWidget/>
     </div>
   );
 };
