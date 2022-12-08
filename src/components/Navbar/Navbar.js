@@ -4,20 +4,16 @@ import CartWidget from "../CartWidget/CartWidget";
 import "./Navbar.css";
 
 const Navbar = () => {
-  /*   const menu = ['Home', 'Products', 'Favourites']
-   */
   return (
     <div className="navbar">
-      {/*       {menu.map((label, index) => <Buttons key={index}>{label}</Buttons>)}
-       */}
       <NavLink
         to="/"
         className={({ isActive }) => (isActive ? "activeBtn" : "btn")}
       >
-        Home
+        Products
       </NavLink>
       <NavLink
-        to="/category"
+        to="/category/gamer"
         className={({ isActive }) => (isActive ? "activeBtn" : "btn")}
       >
         Categories
