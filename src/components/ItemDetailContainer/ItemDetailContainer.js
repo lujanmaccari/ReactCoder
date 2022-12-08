@@ -1,8 +1,13 @@
+import { useState, useEffect } from "react";
+
 const ItemDetailContainer = () => {
-return(
-    <>
-    hola
-    </>
-)
+ const [product, setProduct] = useState("");
+
+useEffect(()=>{
+getProductById("1")
+}, [])
+  return (<>
+
+  </>);
 };
-export default ItemDetailContainer
+export default ItemDetailContainer;

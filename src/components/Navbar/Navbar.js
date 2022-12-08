@@ -1,16 +1,35 @@
-import React, { useState } from "react";
-import Buttons from "../Buttons/Buttons";
+import React from "react";
+import { NavLink } from "react-router-dom";
 import CartWidget from "../CartWidget/CartWidget";
 import "./Navbar.css";
 
 const Navbar = () => {
-  const state = useState()
-  console.log(state)
-  const menu = ['Home', 'Products', 'Favourites']
+  /*   const menu = ['Home', 'Products', 'Favourites']
+   */
   return (
     <div className="navbar">
-      {menu.map((label, index) => <Buttons key={index}>{label}</Buttons>)}
-      <CartWidget/>
+      {/*       {menu.map((label, index) => <Buttons key={index}>{label}</Buttons>)}
+       */}
+      <NavLink
+        to="/"
+        className={({ isActive }) => (isActive ? "activeBtn" : "btn")}
+      >
+        Home
+      </NavLink>
+      <NavLink
+        to="/category"
+        className={({ isActive }) => (isActive ? "activeBtn" : "btn")}
+      >
+        Categories
+      </NavLink>
+      <NavLink
+        to="/detail"
+        className={({ isActive }) => (isActive ? "activeBtn" : "btn")}
+      >
+        Product Detail
+      </NavLink>
+
+      <CartWidget />
     </div>
   );
 };
