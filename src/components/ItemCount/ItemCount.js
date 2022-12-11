@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../context/CartContext";
 
-const ItemCount = ({ stock, onAdd }) => {
-  const [count, setCount] = useState(0);
+const ItemCount = ({ product }) => {
+  const [count, setCount] = useState(1);
   const [quantityToAdd, setQuantityToAdd] = useState(0);
+  const { addToCart, isInCart, removeFromCart } = useContext(CartContext);
 
   const addProduct = () => {
-    if (count < stock) {
+    if (count < product.stock) {
       setCount((prev) => prev + 1);
     }
   };
@@ -21,19 +23,55 @@ const ItemCount = ({ stock, onAdd }) => {
     console.log(count);
     console.log(`se agregaron ${count} productos al carrito`);
     setQuantityToAdd(count);
+    addToCart(product);
   };
 
+  const handleRemove = (count) => {
+    console.log(count);
+    console.log(`se quitaron ${count} productos al carrito`);
+    setQuantityToAdd(count);
+    removeFromCart(product.id);
+  };
+
+  const isAdded = isInCart(product.id);
+  console.log(product.id);
+  console.log(isInCart(product.id));
   return (
     <div>
       <p>{count}</p>
-      <button onClick={deleteProduct}>-</button>
-      <button onClick={addProduct}>+</button>
+      <div>
+        <button className="btnAddRemove" onClick={deleteProduct}>
+          -
+        </button>
+        <button className="btnAddRemove" onClick={addProduct}>
+          +
+        </button>
+      </div>
       {quantityToAdd === 0 ? (
-        <button onClick={() => handleOnAdd(count)} disabled={count == 0}>
-          Agregar al carrito
+        <button
+          onClick={() => {
+            isAdded ? handleRemove(product.id) : handleOnAdd(product.id);
+          }}
+          className="btn2"
+        >
+          {isAdded ? "Quitar del carrito" : "Agregar al carrito"}
         </button>
       ) : (
-        <Link to="/cart">Finalizar compra</Link>
+        <>
+          <button
+            onClick={() => {
+              isAdded ? handleRemove(product.id) : handleOnAdd(product.id);
+            }}
+            className="btn2"
+          >
+            {isAdded ? "Quitar del carrito" : "Agregar al carrito"}
+          </button>
+          {isAdded ? (
+            <Link to="/cart" className="btn2">
+              Finalizar compra
+            </Link>
+          ) : null}
+        </>
       )}
     </div>
   );

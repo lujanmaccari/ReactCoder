@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import ItemCount from "../ItemCount/ItemCount";
 
-const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
+const ItemDetail = ({ product }) => {
   return (
     <div>
-      <h3>{name}</h3>
-      <img src={img} alt={name} />
-      <p>Categoria: {category}</p>
-      <p>{description}</p>
-      <h3>${price}</h3>
-      {stock != 0 ? <ItemCount stock={stock} /> : "No hay mas stock!"}
+      <h3>{product.name}</h3>
+      <img src={product.img} alt={product.name} />
+      <p>Categoria: {product.category}</p>
+      <p>{product.description}</p>
+      <h3>${product.price}</h3>
+      {product.stock != 0 ? <ItemCount stock={product.stock} product = {product}/> : "No hay mas stock!"}
     </div>
   );
 };

@@ -1,11 +1,15 @@
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { Button } from "@mui/material";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { CartContext } from "../../context/CartContext";
 
 const CartWidget = () => {
+  const { cart } = useContext(CartContext);
   return (
-    <Button>
-      <AddShoppingCartIcon />5
-    </Button>
+    <Link to = '/cart' >
+      <AddShoppingCartIcon />
+      {cart.length}
+    </Link>
   );
 };
 export default CartWidget;

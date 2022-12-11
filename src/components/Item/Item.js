@@ -24,14 +24,16 @@ const Item = ({ product }) => {
             {product.name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-          Categoría: {product.category}
-        </Typography>
-        <Typography variant="h7" color="text.secondary">
-          ${product.price}
-        </Typography>
+            Categoría: {product.category}
+          </Typography>
+          <Typography variant="h7" color="text.secondary">
+            ${product.price}
+          </Typography>
         </CardContent>
       </Card>
-      <Link to={`/detail/${product.id}`}>Ver más</Link>
+      <Link to={`/detail/${product.id}`} className="btn2">
+        Ver más
+      </Link>
     </div>
   );
 };
