@@ -1,9 +1,10 @@
 import { CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProducts, getProductsByCategory } from "../AsyncMock/AsyncMock";
 import ItemList from "../ItemList/ItemList";
 import "./ItemListContainer.css";
+import { getDocs, collection, query, where } from "firebase/firestore";
+import { db } from "../../service/Firebase/firebaseConfig";
 
 const ItemListContainer = (props) => {
   const [products, setProducts] = useState([]);
@@ -12,26 +13,24 @@ const ItemListContainer = (props) => {
 
   useEffect(() => {
     setLoading(true);
-
-    if (categoryId) {
-      getProductsByCategory(categoryId)
-        .then((res) => {
-          setProducts(res);
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        .finally(() => setLoading(false));
-    } else {
-      getProducts()
-        .then((res) => {
-          setProducts(res);
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        .finally(() => setLoading(false));
-    }
+    const collectionRef = categoryId
+      ? query(collection(db, "productos"), where("category", "==", categoryId))
+      : collection(db, "productos");
+    getDocs(collectionRef)
+      .then((response) => {
+        console.log(response.docs);
+        const productAdapted = response.docs.map((doc) => {
+          const data = doc.data();
+          return { id: doc.id, ...data };
+        });
+        setProducts(productAdapted);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, [categoryId]);
 
   if (loading) {

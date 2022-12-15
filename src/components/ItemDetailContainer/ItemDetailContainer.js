@@ -1,8 +1,10 @@
 import { CircularProgress } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getProductsById } from "../AsyncMock/AsyncMock";
-import ItemDetail from "../ItemDetail/ItemDetail";
+/* import { getProductsById } from "../AsyncMock/AsyncMock";
+ */ import ItemDetail from "../ItemDetail/ItemDetail";
+import { getDoc, doc } from "firebase/firestore";
+import { db } from "../../service/Firebase/firebaseConfig";
 
 const ItemDetailContainer = () => {
   const [product, setProduct] = useState({});
@@ -11,14 +13,19 @@ const ItemDetailContainer = () => {
 
   useEffect(() => {
     setLoading(true);
-    getProductsById(productId)
-      .then((res) => {
-        setProduct(res);
+    const docRef = doc(db, "productos", productId);
+    getDoc(docRef)
+      .then((doc) => {
+        const data = doc.data();
+        const noteAddapted = { id: doc.id, ...data };
+        setProduct(noteAddapted);
       })
       .catch((error) => {
         console.log(error);
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false);
+      });
   }, [productId]);
 
   if (loading) {
