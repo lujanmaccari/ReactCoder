@@ -1,4 +1,4 @@
-/* const products = [
+ const products = [
   {
     id: "1",
     name: "Teclado",
@@ -53,4 +53,3 @@ export const getProductsByCategory = (categoryId) => {
     });
   });
 };
- */

@@ -2,16 +2,16 @@ import { CircularProgress, Container } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ItemList from "../ItemList/ItemList";
-import "./ItemListContainer.css";
 import { getDocs, collection, query, where } from "firebase/firestore";
 import { db } from "../../service/Firebase/firebaseConfig";
+import { NavLink } from "react-router-dom";
 
 
-const ItemListContainer = (props) => {
+const Category = (props) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [showNavigate, setShowNavigate] = useState(false)
   const { categoryId } = useParams();
+
 
   useEffect(() => {
     setLoading(true);
@@ -46,10 +46,29 @@ const ItemListContainer = (props) => {
 
   return (
     <Container sx={{ display: "grid", justifyContent: "center", mt: "20px" }}>
-      <h1>Listado de productos</h1>
+      <h1>Filtrado de productos</h1>
+      
+      <NavLink
+        to="/category/mouse"
+        className={({ isActive }) => (isActive ? "activeBtn" : "btn")}
+      >
+        Mouse
+      </NavLink>
+      <NavLink
+        to="/category/teclado"
+        className={({ isActive }) => (isActive ? "activeBtn" : "btn")}
+      >
+        Teclados
+      </NavLink>
+      <NavLink
+        to="/category/monitor"
+        className={({ isActive }) => (isActive ? "activeBtn" : "btn")}
+      >
+        Monitores
+      </NavLink>
       <ItemList products={products} />
     </Container>
   );
 };
 
-export default ItemListContainer;
+export default Category;

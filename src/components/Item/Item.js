@@ -1,9 +1,15 @@
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Container,
+  Typography,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 
 const Item = ({ product }) => {
   return (
-    <div>
+    <Container sx={{ display: "grid", justifyContent: "center", mt: "20px" }}>
       <Card
         sx={{
           display: "grid",
@@ -34,7 +40,7 @@ const Item = ({ product }) => {
       <Link to={`/detail/${product.id}`} className="btn2">
         Ver más
       </Link>
-    </div>
+    </Container>
   );
 };
 export default Item;

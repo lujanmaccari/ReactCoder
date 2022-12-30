@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { CartContext } from "../../context/CartContext";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const { cart, removeFromCart } = useContext(CartContext);
-
+  
   return (
     <div>
       <h1>Productos agregados al carrito</h1>
@@ -44,6 +45,10 @@ const Cart = () => {
           </div>
         );
       })}
+      
+        <Link to='/checkout' className="btn2">
+        Confirmar orden
+      </Link>
     </div>
   );
 };

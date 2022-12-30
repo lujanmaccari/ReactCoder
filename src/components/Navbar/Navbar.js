@@ -6,7 +6,7 @@ import "./Navbar.css";
 const Navbar = () => {
   return (
     <div className="navbar">
-      <NavLink
+     <NavLink
         to="/"
         className={({ isActive }) => (isActive ? "activeBtn" : "btn")}
       >

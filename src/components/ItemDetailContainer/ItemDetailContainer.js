@@ -1,8 +1,7 @@
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Container } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-/* import { getProductsById } from "../AsyncMock/AsyncMock";
- */ import ItemDetail from "../ItemDetail/ItemDetail";
+import ItemDetail from "../ItemDetail/ItemDetail";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../service/Firebase/firebaseConfig";
 
@@ -29,14 +28,18 @@ const ItemDetailContainer = () => {
   }, [productId]);
 
   if (loading) {
-    return <CircularProgress color="inherit" />;
+    return (
+      <Container sx={{ display: "grid", justifyContent: "center", mt: "20px" }}>
+        <CircularProgress color="inherit" />
+      </Container>
+    );
   }
 
   return (
-    <>
+    <Container sx={{ display: "grid", justifyContent: "center", mt: "20px" }}>
       <h1>Detalle del producto</h1>
       <ItemDetail product={product} />
-    </>
+    </Container>
   );
 };
 export default ItemDetailContainer;
