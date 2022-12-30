@@ -1,17 +1,23 @@
 import React, { useContext } from "react";
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Container,
+  Typography,
+} from "@mui/material";
 import { CartContext } from "../../context/CartContext";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
   const { cart, removeFromCart } = useContext(CartContext);
-  
+
   return (
-    <div>
+    <Container sx={{ display: "grid", justifyContent: "center", mt: "20px" }}>
       <h1>Productos agregados al carrito</h1>
       {cart.map((cart) => {
         return (
-          <div key={cart.id}>
+          <Container key={cart.id}>
             <Card
               sx={{
                 display: "grid",
@@ -37,19 +43,24 @@ const Cart = () => {
                 <Typography variant="h7" color="text.secondary">
                   ${cart.price}
                 </Typography>
+                <Typography variant="h7" color="text.secondary">
+                  Cantidad: {cart.quantity}
+                </Typography>
+                <Typography variant="h7" color="text.secondary">
+                  Subtotal: {cart.quantity}
+                </Typography>
               </CardContent>
               <button onClick={() => removeFromCart(cart.id)} className="btn2">
                 Eliminar del carrito
               </button>
             </Card>
-          </div>
+          </Container>
         );
       })}
-      
-        <Link to='/checkout' className="btn2">
+      <Link to="/checkout" className="btn2">
         Confirmar orden
       </Link>
-    </div>
+    </Container>
   );
 };
 

@@ -18,19 +18,12 @@ const Navbar = () => {
       >
         Categorias
       </NavLink>
-      <NavLink
+   {/*    <NavLink
         to="/favourites"
         className={({ isActive }) => (isActive ? "activeBtn" : "btn")}
       >
         Favoritos
-      </NavLink>
-     {/*  <NavLink
-        to="/detail"
-        className={({ isActive }) => (isActive ? "activeBtn" : "btn")}
-      >
-        Product Detail
-      </NavLink>
- */}
+      </NavLink> */}
       <CartWidget />
     </div>
   );

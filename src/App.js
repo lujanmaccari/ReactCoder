@@ -26,8 +26,8 @@ function App() {
               path="/detail/:productId"
               element={<ItemDetailContainer />}
             />
-            <Route path="/favourites" element={<Favourites />} />
-            <Route path="/cart" element={<Cart />} />
+{/*             <Route path="/favourites" element={<Favourites />} />
+ */}            <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </BrowserRouter>

@@ -1,4 +1,4 @@
-import { CircularProgress, Container } from "@mui/material";
+import { CircularProgress, Container, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ItemList from "../ItemList/ItemList";
@@ -6,12 +6,10 @@ import { getDocs, collection, query, where } from "firebase/firestore";
 import { db } from "../../service/Firebase/firebaseConfig";
 import { NavLink } from "react-router-dom";
 
-
 const Category = (props) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const { categoryId } = useParams();
-
 
   useEffect(() => {
     setLoading(true);
@@ -35,7 +33,6 @@ const Category = (props) => {
       });
   }, [categoryId]);
 
-
   if (loading) {
     return (
       <Container sx={{ display: "grid", justifyContent: "center", mt: "20px" }}>
@@ -47,25 +44,28 @@ const Category = (props) => {
   return (
     <Container sx={{ display: "grid", justifyContent: "center", mt: "20px" }}>
       <h1>Filtrado de productos</h1>
-      
+      <h2>Buscar por:</h2>
+    <Grid sx={{display: "flex", flexDirection: "row"}}>
+
       <NavLink
         to="/category/mouse"
-        className={({ isActive }) => (isActive ? "activeBtn" : "btn")}
+        className={({ isActive }) => (isActive ? "activeBtn" : "btn2")}
       >
         Mouse
       </NavLink>
       <NavLink
         to="/category/teclado"
-        className={({ isActive }) => (isActive ? "activeBtn" : "btn")}
+        className={({ isActive }) => (isActive ? "activeBtn" : "btn2")}
       >
         Teclados
       </NavLink>
       <NavLink
         to="/category/monitor"
-        className={({ isActive }) => (isActive ? "activeBtn" : "btn")}
+        className={({ isActive }) => (isActive ? "activeBtn" : "btn2")}
       >
         Monitores
       </NavLink>
+    </Grid>
       <ItemList products={products} />
     </Container>
   );
